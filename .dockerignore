@@ -1,0 +1,6 @@
+fly.toml
+__pycache__
+*.pyc
+db.*
+.direnv
+.overmind.env

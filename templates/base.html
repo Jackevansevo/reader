@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <title>Feedreader</title>
+  <link rel="stylesheet" href="https://unpkg.com/missing.css@1.0.9/dist/missing.min.css">
+  <script src="https://unpkg.com/htmx.org@1.9.5" integrity="sha384-xcuj3WpfgjlKF+FXhSQFQ0ZNr39ln+hwjN3npfM9VBnUskLolQAcN80McRIVOPuO" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='pygments.css') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <body>
+    <div id="x" class="container" style="padding-top: 1rem;">
+        {% block body %}
+        {% endblock %}
+    </div>
+  </body>
+</html>

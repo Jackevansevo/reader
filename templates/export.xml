@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<opml version="2.0">
+  <head>
+    <title>Feedreader</title>
+    <dateCreated>Sun, 03 Sep 2023 12:59:05 UTC</dateCreated>
+  </head>
+  <body>
+    <outline text="All">{% for feed in feeds %}
+      <outline title="{{ feed.title or feed.link or feed.url }}" text="{{ feed.title or feed.link or feed.url }}" xmlUrl="{{ feed.url }}" htmlUrl="{{ feed.link or feed.url }}"></outline>{% endfor %}
+    </outline>
+  </body>
+</opml>

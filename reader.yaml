@@ -1,0 +1,4 @@
+default:
+    # The reader section contains make_reader() keyword arguments:
+    reader:
+        url: db.sqlite

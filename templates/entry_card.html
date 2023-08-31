@@ -1,0 +1,8 @@
+<article class="box" style="padding: 1rem;">
+  <span>
+    <img style="width: 15px; height: 15px" src="{{ url_for('get_favicon', url=entry.feed.url) }}" loading="lazy" border="0"/>
+    <a href="{{ url_for('entry', url=entry.feed.url, id=entry.id) }}" hx-get="{{ url_for('entry', url=entry.feed.url, id=entry.id) }}" hx-target="#x" hx-push-url="true">{{ entry.title }}</a> {% if entry.published %}{% endif %}
+  </span>
+  <br>
+  <small><a style="color: inherit;" href="{{ url_for('feed', url=entry.feed.url) }}">{{ entry.feed.title }}</a>{% if entry.published %}&nbsp;&nbsp;{{ entry.published|naturaltime }}{% endif %}</small>
+</article>

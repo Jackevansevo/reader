@@ -1,0 +1,11 @@
+Flask-HTTPAuth
+bleach
+celery[redis]
+flask
+flask-htmx
+gunicorn
+humanize
+listparser
+pygments
+python-dotenv
+reader[cli]

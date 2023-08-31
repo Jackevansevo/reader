@@ -1,0 +1,29 @@
+<nav class="breadcrumbs" aria-label="Breadcrumbs">
+  <ol>
+    <li><a href="/" hx-get="/" hx-target="#x" hx-push-url="true">Home</a></li>
+    <li><a href="/feeds" hx-get="/feeds" hx-target="#x" hx-push-url="true">Feeds</a></li>
+  </ol>
+</nav>
+<h1>Feedreader</h1>
+{% if entries %}
+  <form method="POST" action="{{ url_for('mark_all_read') }}">
+    <button type="submit">Mark all as read</button>
+  </form>
+  <br>
+  {% for entry in entries %}
+    {% include "entry_card.html" %}
+  {% endfor %}
+  {% with last_entry = entries | last %}
+    <a href="{{ url_for('index', url=last_entry.feed.url, id=last_entry.id) }}">Next page</a>
+  {% endwith %}
+{% else %}
+  {% if not feeds %}
+    <div class="box warn">
+      No feeds available, get started by <a href="/import">importing some feeds</a>
+    </div>
+  {% else %}
+    <div class="box warn">
+      Nothing to read right now, <a href='/feeds' hx-get="/feeds" hx-target="#x" hx-push-url="true">Browse feeds</a>
+    </div>
+  {% endif %}
+{% endif %}

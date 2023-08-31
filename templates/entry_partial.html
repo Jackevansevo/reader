@@ -1,0 +1,27 @@
+<nav class="breadcrumbs" aria-label="Breadcrumbs">
+<ol style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+<li><a href="/" hx-get="/" hx-target="#x" hx-push-url="true">Home</a></li>
+<li><a href="/feeds" hx-get="/feeds" hx-target="#x" hx-push-url="true">Feeds</a></li>
+<li><a href="{{ url_for('feed', url=entry.feed.url) }}" hx-get="{{ url_for('feed', url=entry.feed.url) }}" hx-target="#x" hx-push-url="true">{{ entry.feed.title or entry.feed.link or entry.feed.url}}</a></li>
+<li><a href="#">{{ entry.title }}</a></li>
+</ol>
+</nav>
+<h1><a href="{{ entry.link }}">{{ entry.title }}</a></h1>
+<h2><a href="{{ url_for('feed', url=entry.feed.url) }}">{{ entry.feed.title }}</a></h2>
+{% if entry.published %}
+<p>Published: {{ entry.published }}</p>
+{% endif %}
+<br>
+{% if not entry.read %}
+<form method="POST" action="{{ url_for('mark_read', url=entry.feed.url, id=entry.id, read=1) }}">
+<button type="submit">Mark as read</button>
+</form>
+{% else %}
+<form method="POST" action="{{ url_for('mark_read', url=entry.feed.url, id=entry.id, read=0) }}">
+<button type="submit">Unmark as read</button>
+</form>
+{% endif %}
+<hr>
+<article style="overflow: hidden;">
+{{ content | safe }}
+</article>

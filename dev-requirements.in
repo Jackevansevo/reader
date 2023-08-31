@@ -1,0 +1,7 @@
+-c requirements.txt
+flask-shell-ipython
+ipython
+black
+flake8
+isort
+mypy

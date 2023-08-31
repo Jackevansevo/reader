@@ -1,0 +1,4 @@
+{% extends "base.html" %}
+{% block body %}
+  <div hx-get="{{ url_for('feed', url=feed.url, show=request.args.get('show', 'unread')) }}" hx-trigger="load" hx-target="#x"></div>
+{% endblock %}

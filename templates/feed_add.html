@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block nav %}
+  <nav class="breadcrumbs" aria-label="Breadcrumbs">
+    <ol>
+      <li><a href="/">Home</a></li>
+    </ol>
+  </nav>
+{% endblock nav %}
+{% block body %}
+  <div class="box">
+    <h1>Add Feed</h1>
+    <form method="POST" class="table rows">
+      <label for="url">Feed URL</label>
+      <input class="width:100%" type="url" id="url" name="url"required/>
+      <br>
+      <br>
+      <button type="submit">Import</button>
+    </form>
+  </div>
+{% endblock %}

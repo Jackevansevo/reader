@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block nav %}
+  <nav class="breadcrumbs" aria-label="Breadcrumbs">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li><a href="#">{{ feed.title or feed.url or feed.link }}</a></li>
+    </ol>
+  </nav>
+{% endblock nav %}
+{% block body %}
+  <hr>
+  <div class="box bad">
+    Are you sure you wan to delete: {{ feed.title or feed.url or feed.link }}
+    <form method="POST" action="{{ url_for('delete_feed', url=feed.url) }}">
+      <br>
+      <button type="submit">Yes</button>
+    </form>
+  </div>
+{% endblock %}

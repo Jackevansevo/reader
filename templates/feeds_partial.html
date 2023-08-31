@@ -1,0 +1,42 @@
+
+<nav class="breadcrumbs" aria-label="Breadcrumbs">
+  <ol>
+    <li><a href="/" hx-get="/" hx-target="#x" hx-push-url="true">Home</a></li>
+    <li><a href="#">Feeds</a></li>
+  </ol>
+</nav>
+<nav class="breadcrumbs" aria-label="Breadcrumbs">
+  <ol>
+    <li><a href="{{ url_for('add_feed') }}">Add Feed</a></li>
+    <li><a href="{{ url_for('export_feeds') }}">Export</a></li>
+    <li><a href="{{ url_for('import_feeds') }}">Import</a></li>
+    <li><a href="{{ url_for('export_db') }}">DB Export</a></li>
+    <li><a href="{{ url_for('import_db') }}">DB Import</a></li>
+  </ol>
+</nav>
+
+<h1>Feeds ({{ feeds | length }})</h1>
+<form method="POST" action="{{ url_for('refresh_feeds') }}">
+  <button type="submit">Refresh</button>
+</form>
+<hr>
+{% if feeds %}
+  {% for feed in feeds %}
+    <article class="box" style="padding: 1rem;">
+      <a href="{{ url_for('feed', url=feed.url) }}" hx-get="{{ url_for('feed', url=feed.url) }}" hx-target="#x" hx-push-url="true">
+        <img style="width: 15px; height: 15px" src="{{ url_for('get_favicon', url=feed.url) }}" loading="lazy"></img>
+        {{ feed.title or feed.link or feed.url }}
+      </a>
+      <small style="display: block; padding-top: 0.4rem">
+        <a href="{{ feed.link }}">{{ feed.link }}</a>
+        {% if feed.last_updated  %}
+          <span>&nbsp;&nbsp;Last checked: {{ feed.last_updated|naturaltime }}</span>
+        {% endif %}
+      </small>
+    </article>
+  {% endfor %}
+{% else %}
+  <div class="box warn">
+    No feeds available, get started by <a href="/import">importing some feeds</a>
+  </div>
+{% endif %}

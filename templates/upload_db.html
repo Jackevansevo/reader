@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block nav %}
+  <nav class="breadcrumbs" aria-label="Breadcrumbs">
+    <ol>
+      <li><a href="/">Home</a></li>
+    </ol>
+  </nav>
+{% endblock nav %}
+{% block body %}
+  <h1>Import DB</h1>
+  <form method="POST" enctype="multipart/form-data">
+    <label for="opml">Select sqlite File:</label>
+    <input type="file" id="db" name="db" accept=".sqlite" required/>
+    <button type="submit">Upload</button>
+  </form>
+{% endblock %}

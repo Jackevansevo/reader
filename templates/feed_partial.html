@@ -1,0 +1,34 @@
+<nav class="breadcrumbs" aria-label="Breadcrumbs">
+  <ol>
+    <li><a href="/" hx-get="/" hx-target="#x" hx-push-url="true">Home</a></li>
+    <li><a href="/feeds" hx-get="/feeds" hx-target="#x" hx-push-url="true">Feeds</a></li>
+    <li><a href="#">{{ feed.title or feed.link or feed.url}}</a></li>
+  </ol>
+</nav>
+<h1>
+  <img style="width: 30px; height: 30px" src="{{ url_for('get_favicon', url=feed.url) }}" loading="lazy" border="0"/>
+  <a href="{{ feed.link or feed.url }}">
+    {{ feed.title or feed.link or feed.url }}
+  </a>
+</h1>
+<p>Last updated: {{ feed.last_updated }}</p>
+<p>
+  <a href="{{ feed.url }}"}>RSS Link</a>
+  {% if not request.args.show or request.args.show == 'unread' %}
+    &nbsp;&nbsp;<a href="{{ url_for('feed', url=feed.url, show='all') }}" hx-get="{{ url_for('feed', url=feed.url, show='all') }}" hx-target="#x" hx-push-url="true">Show all entries</a>
+  {% else %}
+    &nbsp;&nbsp;<a href="{{ url_for('feed', url=feed.url, show='unread') }}" hx-get="{{ url_for('feed', url=feed.url, show='unread') }}" hx-target="#x" hx-push-url="true">Show only unread entries</a>
+  {% endif %}
+  {{ request.args.read }}
+  &nbsp;&nbsp;<a href="{{ url_for('confirm_delete_feed', url=feed.url) }}">Remove this feed</a>
+</p>
+<form method="POST" action="{{ url_for('mark_all_read') }}">
+  <button type="submit">Mark all as read</button>
+</form>
+<form method="POST" action="{{ url_for('refresh_feed') + '?url=' + feed.url }}">
+  <button type="submit">Refresh</button>
+</form>
+<hr>
+{% for entry in entries %}
+  {% include "entry_card.html" %}
+{% endfor %}
